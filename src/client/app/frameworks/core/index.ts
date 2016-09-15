@@ -16,6 +16,9 @@ export * from './services/console.service';
 export * from './services/log.service';
 export * from './services/window.service';
 export * from './services/router-extensions';
+export * from './services/utils.service';
 
 // directives
 export * from './directives/platform.directive';
+
+export * from './tokens';

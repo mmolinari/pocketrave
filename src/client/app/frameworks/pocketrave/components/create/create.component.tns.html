@@ -1,0 +1,24 @@
+<ActionBar title="Draw!">
+    <ActionItem (tap)="goHome()" ios.position="right">
+        <Button [text]="'fa-home' | fonticon" class="purple fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<StackLayout class="card">
+    <Label class="title" text="Draw a pattern"></Label>
+    <DrawingPad #DrawingPad height="50%" backgroundColor="#000" [penColor]="penColor$ | async"
+        [penWidth]="penWidth$ | async">
+    </DrawingPad>
+
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Button class="blue" text="Color" (tap)="selectColor()"></Button>
+        <Button class="blue" text="Clear" (tap)="clearDrawing()"></Button>       
+        <Button class="pink" text="Save" (tap)="saveDrawing()"></Button>
+    </StackLayout>
+
+    <StackLayout>
+        <Label text="Pen Width:" textWrap="true"></Label>
+        <Slider minValue="1" maxValue="20" value="3" (propertyChange)="widthChangeThrottle($event)"></Slider>
+    </StackLayout>
+
+</StackLayout>

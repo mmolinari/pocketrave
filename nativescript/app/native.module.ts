@@ -4,30 +4,38 @@ import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router/router-extensions';
+import { NativescriptPlatformLocation } from 'nativescript-angular/router/ns-platform-location';
+import { NSLocationStrategy } from 'nativescript-angular/router/ns-location-strategy';
+
+import {registerElement} from 'nativescript-angular/element-registry';
+registerElement("DrawingPad", () => require("nativescript-drawingpad").DrawingPad);
+registerElement("PlayPause", () => require("nativescript-play-pause-button").PlayPauseButton);
 
 // angular
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 
 // libs
-import { TranslateModule, TranslateLoader } from 'ng2-translate/ng2-translate';
-import { TNSTranslateLoader } from 'nativescript-ng2-translate/nativescript-ng2-translate';
+import {TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ng2-fonticon';
 
 // app
-import { WindowService, ConsoleService, RouterExtensions } from './app/frameworks/core/index';
+import { Config, WindowService, ConsoleService, RouterExtensions } from './app/frameworks/core/index';
 import { NSAppComponent } from './pages/app/app.component';
-import { AboutComponent } from './app/components/about/about.component';
-import { HomeComponent } from './app/components/home/home.component';
-import { routes } from './app/components/app.routes';
+import { TOKENS_NATIVE } from './tokens.native';
+
+//pocketrave
+import { AppComponent, ENTRY_COMPONENTS } from './app/frameworks/pocketrave/index';
+import { routes } from './app/frameworks/pocketrave/routes';
+import { PocketRaveModule } from './app/frameworks/pocketrave/pocketrave.module';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualModule } from './app/frameworks/i18n/multilingual.module';
-import { SampleModule } from './app/frameworks/sample/sample.module';
 
 // {N} custom app specific
 import { WindowNative } from './shared/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './shared/nativescript/index';
+
+enableProdMode();
 
 // intermediate component module
 // helps encapsulate custom native modules in with the components
@@ -37,20 +45,18 @@ import { NS_ANALYTICS_PROVIDERS } from './shared/nativescript/index';
     NativeScriptModule,
     NativeScriptFormsModule,
     NativeScriptHttpModule,
-    NativeScriptRouterModule,
-    MultilingualModule,
-    TranslateModule
+    NativeScriptRouterModule
   ],
   declarations: [
-    HomeComponent,
-    AboutComponent
+    TNSFontIconPipe,
+    TNSFontIconPurePipe,
+    ENTRY_COMPONENTS
   ],
   exports: [
     NativeScriptModule,
     NativeScriptFormsModule,
     NativeScriptHttpModule,
-    NativeScriptRouterModule,
-    MultilingualModule
+    NativeScriptRouterModule
   ]
 })
 class ComponentModule { }
@@ -62,12 +68,19 @@ class ComponentModule { }
       { provide: ConsoleService, useValue: console }
     ]),
     AnalyticsModule,
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: () => new TNSTranslateLoader('assets/i18n')
-    }),
-    SampleModule,
     ComponentModule,
+    PocketRaveModule.forRoot([
+      TOKENS_NATIVE,
+      {
+        provide: TNSFontIconService,
+        useFactory: () => {
+          return new TNSFontIconService({
+            'fa': 'fonts/font-awesome.css',
+            'ion': 'fonts/ionicons.css'
+          });
+        }
+      }
+    ]),
     NativeScriptRouterModule.forRoot(routes)
   ],
   declarations: [

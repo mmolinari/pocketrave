@@ -18,8 +18,30 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    background-image: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    padding: 5em 0 2em 0;
+    cursor: pointer;
 }
 
+/* Main */
+
+
+
+hr {
+    position: relative;
+    display: block;
+    border: 0;
+    top: 4.5em;
+    margin-bottom: 9em;
+    height: 6px;
+    border-top: solid 1px rgba(128, 128, 128, 0.2);
+    border-bottom: solid 1px rgba(128, 128, 128, 0.2);
+}
 p {
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -29,40 +51,11 @@ p {
 }
 
 ul {
-  margin: 10px 0 0;
+  margin: 10px 0 0 0;
   padding: 0 0 0 20px;
 }
 
 li {
   font-weight: 400;
   margin-top: 4px;
-}
-
-input {
-  border: 1px solid #106cc8;
-  font-size: 14px;
-  height: 40px;
-  outline: none;
-  padding: 8px;
-}
-
-button {
-  background-color: #106cc8;
-  border-style: none;
-  color: rgba(255, 255, 255, 0.87);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  height: 40px;
-  padding: 8px 18px;
-  text-decoration: none;
-}
-
-button:hover {
-  background-color: #28739e;
-}
-
-/* platform specific */
-.desktop lang-switcher {
-  display: none;
 }

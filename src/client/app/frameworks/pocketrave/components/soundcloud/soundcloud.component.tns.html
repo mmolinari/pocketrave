@@ -1,0 +1,25 @@
+<ActionBar title="SoundTrack">
+    <ActionItem (tap)="goHome()">
+        <Button [text]="'fa-home' | fonticon" class="purple fa action-btn"></Button>
+    </ActionItem>
+    <ActionItem (tap)="help()" ios.position="right">
+        <Button [text]="'fa-question-circle' | fonticon" class="purple fa action-btn"></Button>
+    </ActionItem>
+</ActionBar>
+
+<StackLayout class="card">
+    <Label class="title" text="Select a Track"></Label>
+    <SearchBar #SearchBar (submit)="search($event)" (clear)="clear()"></SearchBar>
+    <GridLayout columns="*" rows="*">
+        <ListView [items]="tracks$ | async" row="0">
+                <template let-item="item">
+                    <GridLayout columns="60,*,*" rows="*">
+                        <PlayPause #PlayPause width="50" height="50" buttonColor="#6E09F5" buttonBgColor="#ffffff" col="0" (playPauseTap)="playTrack(item)"></PlayPause>
+                        <Image [src]="item.artwork_url" col="1" width="50" height="50" (tap)="selectTrack(item)"></Image>
+                        <Label class="black" [text]="item.title" col="2" textWrap="true"  (tap)="selectTrack(item)"></Label>
+                    </GridLayout>
+                </template>
+            </ListView>
+        </GridLayout>
+  </StackLayout>
+

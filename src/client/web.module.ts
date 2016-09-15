@@ -4,28 +4,21 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-// app
-import { AppComponent } from './app/components/app.component';
-import { HomeComponent } from './app/components/home/home.component';
-import { AboutComponent } from './app/components/about/about.component';
-import { routes } from './app/components/app.routes';
-
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualModule } from './app/frameworks/i18n/multilingual.module';
-import { SampleModule } from './app/frameworks/sample/sample.module';
+
+//pocketrave
+import { TOKENS_WEB } from './tokens.web';
+import { AppComponent } from './app/frameworks/pocketrave/components/app/app.component';
+import { ENTRY_COMPONENTS } from './app/frameworks/pocketrave/components/index';
+import { routes } from './app/frameworks/pocketrave/routes';
+import { PocketRaveModule } from './app/frameworks/pocketrave/pocketrave.module';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 Config.DEBUG.LEVEL_4 = true;
-
-// sample config (extra)
-import { AppConfig } from './app/frameworks/sample/services/app-config';
-import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
-// custom i18n language support
-MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
 
 let routerModule = RouterModule.forRoot(routes);
 
@@ -44,13 +37,11 @@ if (String('<%= TARGET_DESKTOP %>') === 'true') {
     ]),
     routerModule,
     AnalyticsModule,
-    MultilingualModule,
-    SampleModule
+    PocketRaveModule.forRoot(TOKENS_WEB)
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
-    AboutComponent
+    ENTRY_COMPONENTS
   ],
   providers: [
     {

@@ -1,0 +1,9 @@
+.content{
+    margin: 1em;
+    border-radius: 2px;
+    background-color: black;
+    padding: 1em;
+}
+a {
+    color: white;
+}

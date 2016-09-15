@@ -11,6 +11,7 @@ import { ConsoleService } from './services/console.service';
 import { LogService } from './services/log.service';
 import { RouterExtensions } from './services/router-extensions';
 import { WindowService } from './services/window.service';
+import { UtilsService } from './services/utils.service';
 
 interface ICoreModuleOptions {
   window?: any;
@@ -41,7 +42,8 @@ interface ICoreModuleOptions {
     ConsoleService,
     LogService,
     RouterExtensions,
-    WindowService
+    WindowService,
+    UtilsService
   ]
 })
 export class CoreModule {

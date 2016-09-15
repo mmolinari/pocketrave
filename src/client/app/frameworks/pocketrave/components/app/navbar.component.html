@@ -1,0 +1,22 @@
+<header id="header">
+	<h1 [routerLink]="['/']"><img src="../assets/logo.png"></h1>
+	<nav class="links">
+		<ul>
+			<li [routerLink]="['/choose']">Choose Your Experience</li>
+			<li [routerLink]="['/lightshow']">Add A Light Show!</li>
+			<li [routerLink]="['/about']">About PocketRave</li>
+		</ul>
+	</nav>
+	<nav class="tabletlinks">
+		<ul id="menu">
+			<li [routerLink]="['/choose']">Choose</li>
+			<li [routerLink]="['/lightshow']">Lights!</li>
+			<li [routerLink]="['/about']">About</li>
+		</ul>
+	</nav>	
+</header>
+
+<nav class="phonelinks"><span class="navbutton" [routerLink]="['/choose']">Choose</span><span class="navbutton" [routerLink]="['/lightshow']">Lights!</span><span class="navbutton" [routerLink]="['/about']">About</span></nav>
+
+
+
