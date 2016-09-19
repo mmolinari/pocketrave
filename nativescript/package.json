@@ -5,7 +5,7 @@
   "nativescript": {
     "id": "com.yourdomain.appname",
     "tns-ios": {
-      "version": "2.3.0"
+      "version": "2.2.1"
     },
     "tns-android": {
       "version": "2.3.0"
@@ -25,7 +25,7 @@
     "@angular/platform-server": "2.0.0",
     "@angular/router": "3.0.0",
     "@ngrx/core": "^1.2.0",
-    "@ngrx/store": "^2.1.2",
+    "@ngrx/store": "^2.2.1",
     "angulartics2": "^1.1.6",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.35.0",
