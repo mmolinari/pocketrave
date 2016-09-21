@@ -1,4 +1,4 @@
-<div class="loader" *ngIf="raves$.length == 0"></div>
+<div class="loader" *ngIf="size == 0"></div>
 <section class="tiles">
     <article *ngFor="let rave of raves$ | async" (click)="choose(rave)">
         <span>

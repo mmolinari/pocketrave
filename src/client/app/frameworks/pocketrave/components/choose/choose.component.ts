@@ -12,13 +12,16 @@ import {Router} from '@angular/router';
 })
 export class ChooseComponent implements OnInit {
 public raves$: Observable<any>;
-
+public size: number = 0;
   
 constructor(private firebase: FirebaseService, private _router: Router) { 
  }
 
  ngOnInit() {
     this.raves$ = this.firebase.getRaves();
+    this.raves$.forEach((item) => {
+      this.size++;
+    });
   }
 
 public choose(rave: RaveModel) {
