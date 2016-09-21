@@ -13,14 +13,14 @@ Config.PLATFORM_TARGET = Config.PLATFORMS.MOBILE_NATIVE;
 // (optional) log level - defaults to no logging if not set
 Config.DEBUG.LEVEL_4 = true;
 
-// (optional) custom i18n language support
-// example of how you can configure your own language sets
-// you can use the AppConfig class or build something similar into your own framework
-import { AppConfig } from './app/frameworks/sample/services/app-config';
-import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
-MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
-
 // app
 import { NativeModule } from './native.module';
+
+// NJA: Fix for iOS font registration during webpack
+if (global.NSObject && global.NSString) {
+  var font = require("ui/styling/font");
+  font.ios.registerFont('ionicons.ttf');
+  font.ios.registerFont('fontawesome-webfont.ttf');
+}
 
 platformNativeScriptDynamic().bootstrapModule(NativeModule);
