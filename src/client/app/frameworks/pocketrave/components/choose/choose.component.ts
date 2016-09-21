@@ -5,10 +5,10 @@ import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router';
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-choose',
-  templateUrl: 'choose.component.html',
-  styleUrls: ['choose.component.css']
+  templateUrl: './app/frameworks/pocketrave/components/choose/choose.component.html',
+  styleUrls: ['./app/frameworks/pocketrave/components/choose/choose.component.css']
 })
 export class ChooseComponent implements OnInit {
 public raves$: Observable<any>;

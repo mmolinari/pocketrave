@@ -8,10 +8,10 @@ import {Config} from '../../../core/utils/config';
 import {Router} from '@angular/router';
 
 @BaseComponent({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css']
+  templateUrl: './app/frameworks/pocketrave/components/home/home.component.html',
+  styleUrls: ['./app/frameworks/pocketrave/components/home/home.component.css']
 })
 export class HomeComponent implements OnInit {
   public raves$: Observable<any>;

@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-about',
-  templateUrl: 'about.component.html',
-  styleUrls: ['about.component.css']
+  templateUrl: './app/frameworks/pocketrave/components/about/about.component.html',
+  styleUrls: ['./app/frameworks/pocketrave/components/about/about.component.css']
 })
 export class AboutComponent {}

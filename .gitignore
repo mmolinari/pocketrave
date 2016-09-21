@@ -51,6 +51,8 @@ nativescript/platforms
 nativescript/**/*.js
 nativescript/**/*.js.map
 nativescript/*.d.ts
+!nativescript/extendfixer.js
+!nativescript/webpack.config.js
 !nativescript/references.d.ts
 nativescript/app/app
 nativescript/app/assets

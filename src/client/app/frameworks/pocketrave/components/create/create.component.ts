@@ -11,9 +11,9 @@ import {throttle} from 'lodash';
 
 
 @BaseComponent({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-create',
-  templateUrl: 'create.component.html'
+  templateUrl: './app/frameworks/pocketrave/components/create/create.component.html'
 })
 export class CreateComponent {
 

@@ -10,19 +10,19 @@ import {Config} from '../../../core/utils/config';
 
 
 @BaseComponent({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-soundcloud',
-  templateUrl: 'soundcloud.component.html'
+  templateUrl: './app/frameworks/pocketrave/components/soundcloud/soundcloud.component.html'
 })
 export class SoundCloudComponent implements OnInit, OnDestroy {
 
   public tracks$: BehaviorSubject<Array<SoundCloudModel>> = new BehaviorSubject([]);
-  
+
   private isPlaying: Boolean = false;
   private player: any;
   private currentUrl: string;
-  
-  
+
+
   constructor(
     private logger: LogService,
     private _router: Router,
@@ -38,9 +38,9 @@ export class SoundCloudComponent implements OnInit, OnDestroy {
 
   public search(e: any) {
     if (e && e.object) {
-      
-      
-        
+
+
+
 
       this.LoadingIndicator.show({ message: 'Finding tracks...' });
       this.soundcloud.search(e.object.text)
@@ -52,18 +52,18 @@ export class SoundCloudComponent implements OnInit, OnDestroy {
             if (this.frame.topmost().android) {
               let sb = this.searchbar.nativeElement;
               sb.dismissSoftInput();
-            } 
-          } 
+            }
+          }
         });
     }
   }
 
-  public goHome() {   
+  public goHome() {
       this.player.dispose().then(() => {
            this._router.navigate(['/']);
         }, (err:any) => {
         console.log(err);
-      });      
+      });
   }
 
   public clear() {
@@ -105,7 +105,7 @@ export class SoundCloudComponent implements OnInit, OnDestroy {
   }
 
   public playAudio(filepath: string, fileType: string) {
-    
+
     try {
       var playerOptions = {
         audioFile: filepath,
@@ -147,9 +147,9 @@ export class SoundCloudComponent implements OnInit, OnDestroy {
 
   public playTrack(item: any) {
     let url = item.stream_url + '?client_id=2c9246f94f06d25e2e728935dfd79f8f';
-    
+
     if (this.player) this.player.pause();
-    
+
     if (this.currentUrl !== url) {
       this.selectTrack(item);
       this.playAudio(url, 'remoteFile');
@@ -165,8 +165,8 @@ export class SoundCloudComponent implements OnInit, OnDestroy {
     }
     this.currentUrl = url;
   }
-  
-  
+
+
 
   ngOnInit() {
     this.player = new this.audio.TNSPlayer();

@@ -6,10 +6,10 @@ import {Observable} from 'rxjs/Observable';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'sd-kaleidoscope',
-  templateUrl: 'kaleidoscope.component.html',
-  styleUrls: ['kaleidoscope.component.css']
+  templateUrl: './app/frameworks/pocketrave/components/kaleidoscope/kaleidoscope.component.html',
+  styleUrls: ['./app/frameworks/pocketrave/components/kaleidoscope/kaleidoscope.component.css']
 })
 export class KaleidoscopeComponent implements OnDestroy {
   public rave: Observable<any>;
@@ -19,9 +19,9 @@ export class KaleidoscopeComponent implements OnDestroy {
   private sub: any;
 
 
-  constructor(   
-    private sanitizer: DomSanitizer, 
-    private route: ActivatedRoute, 
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
     private firebase: FirebaseService) {
         this.sub = this.route.params.subscribe((params:any) => {
         this.id = params['id'];
@@ -35,7 +35,7 @@ export class KaleidoscopeComponent implements OnDestroy {
             }
           }
       });
-    });    
+    });
   }
 
   ngOnDestroy() {
