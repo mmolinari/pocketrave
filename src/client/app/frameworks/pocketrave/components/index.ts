@@ -2,7 +2,7 @@ import { NavbarComponent } from './app/navbar.component';
 import { ChooseComponent } from './choose/choose.component';
 import { CreateComponent } from './create/create.component';
 import { HomeComponent } from './home/home.component';
-import { KaleidoscopeComponent } from './kaleidoscope/kaleidoscope.component';
+import { ViewComponent } from './view/view.component';
 import { LightShowComponent } from './lightshow/lightshow.component';
 import { SoundCloudComponent } from './soundcloud/soundcloud.component';
 import { AboutComponent } from './about/about.component';
@@ -19,7 +19,7 @@ export const ENTRY_COMPONENTS: any[] = [
   LightShowComponent,
   CreateComponent,
   SoundCloudComponent,
-  KaleidoscopeComponent,
+  ViewComponent,
   AboutComponent
 ];
 
@@ -28,7 +28,7 @@ export * from './app/navbar.component';
 export * from './choose/choose.component';
 export * from './create/create.component';
 export * from './home/home.component';
-export * from './kaleidoscope/kaleidoscope.component';
+export * from './view/view.component';
 export * from './lightshow/lightshow.component';
 export * from './soundcloud/soundcloud.component';
 export * from './about/about.component';

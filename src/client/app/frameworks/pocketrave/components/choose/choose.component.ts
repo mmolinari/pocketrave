@@ -25,7 +25,7 @@ constructor(private firebase: FirebaseService, private _router: Router) {
   }
 
 public choose(rave: RaveModel) {
-    this._router.navigate(['/kaleidoscope', rave.id]);
+    this._router.navigate(['/view', rave.id]);
 }
 
 }
