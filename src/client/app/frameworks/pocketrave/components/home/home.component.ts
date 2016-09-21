@@ -6,6 +6,7 @@ import {FirebaseService} from '../../../pocketrave/services/firebase.service';
 import {Observable} from 'rxjs/Observable';
 import {Config} from '../../../core/utils/config';
 import {Router} from '@angular/router';
+import {RaveModel} from '../../../pocketrave/models/rave.model';
 
 @BaseComponent({
   // moduleId: module.id,
@@ -34,19 +35,6 @@ export class HomeComponent implements OnInit {
 
   public create() {
     this._router.navigate(['/create']);
-  }
-
-  public info() {
-    var options = {
-      title: 'Play a PocketRave!',
-      message: 'Play this PocketRave on the web with a beautiful visualization by visiting http://pocketrave.me.',
-      cancelButtonText: 'Got it!'
-    };
-    this.dialogs.confirm(options).then((result: boolean) => {
-      if (result === true) {
-       this._router.navigate(['/']);
-      }
-    });
   }
 
   public help() {

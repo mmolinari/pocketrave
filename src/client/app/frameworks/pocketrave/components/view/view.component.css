@@ -60,8 +60,6 @@
   -ms-transform-origin: left top;
   left: 100%;
   top: 0;
-  /*background-image: url(https://firebasestorage.googleapis.com/v0/b/pocketrave-644be.appspot.com/o/uploads%2Fimages%2F0.5049313602503389.png?alt=media&token=42d1c098-dd26-47a8-b384-11b061fa4598);
-  background-image: url(./assets/squid.jpg);*/
   animation: bgpos 20s infinite;
 }
 

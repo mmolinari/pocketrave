@@ -7,28 +7,27 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   // moduleId: module.id,
-  selector: 'sd-kaleidoscope',
-  templateUrl: './app/frameworks/pocketrave/components/kaleidoscope/kaleidoscope.component.html',
-  styleUrls: ['./app/frameworks/pocketrave/components/kaleidoscope/kaleidoscope.component.css']
+  selector: 'sd-view',
+  templateUrl: './app/frameworks/pocketrave/components/view/view.component.html',
+  styleUrls: ['./app/frameworks/pocketrave/components/view/view.component.css']
 })
-export class KaleidoscopeComponent implements OnDestroy {
+export class ViewComponent implements OnDestroy {
   public rave: Observable<any>;
   id: any;
   url: any;
   image: any;
   private sub: any;
 
-
   constructor(
-    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private firebase: FirebaseService) {
+    private domSanitizer: DomSanitizer,
+      private firebase: FirebaseService) {
         this.sub = this.route.params.subscribe((params:any) => {
         this.id = params['id'];
-        this.firebase.getSelectedRave(this.id).then((rave:any) => {
+          this.firebase.getSelectedRave(this.id).then((rave:any) => {
           for (let prop in rave) {
             if (prop === 'url') {
-              this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://w.soundcloud.com/player/?url='+rave[prop]+'&amp;color=000000&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false');
+              this.url = this.domSanitizer.bypassSecurityTrustResourceUrl('https://w.soundcloud.com/player/?url='+rave[prop]+'&amp;color=000000&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false');
             }
             if (prop === 'image') {
               this.image = rave[prop];
@@ -37,6 +36,7 @@ export class KaleidoscopeComponent implements OnDestroy {
       });
     });
   }
+
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
