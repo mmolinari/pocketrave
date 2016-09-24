@@ -6,10 +6,10 @@ import {Observable} from 'rxjs/Observable';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  // moduleId: module.id,
+  moduleId: module.id,
   selector: 'sd-view',
-  templateUrl: './app/frameworks/pocketrave/components/view/view.component.html',
-  styleUrls: ['./app/frameworks/pocketrave/components/view/view.component.css']
+  templateUrl: 'view.component.html',
+  styleUrls: ['view.component.css']
 })
 export class ViewComponent implements OnDestroy {
   public rave: Observable<any>;

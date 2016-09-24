@@ -6,10 +6,6 @@
     "public": "dist/prod",
     "rewrites": [
       {
-        "source": "/public/**",
-        "destination": "/public.html"
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }

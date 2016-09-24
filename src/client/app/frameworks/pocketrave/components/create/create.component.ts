@@ -11,9 +11,9 @@ import {throttle} from 'lodash';
 
 
 @BaseComponent({
-  // moduleId: module.id,
+  moduleId: module.id,
   selector: 'sd-create',
-  templateUrl: './app/frameworks/pocketrave/components/create/create.component.html'
+  templateUrl: 'create.component.html'
 })
 export class CreateComponent {
 
@@ -56,8 +56,7 @@ export class CreateComponent {
         this.LoadingIndicator.hide();
         alert(err);
         });
-      }
-      else {
+      } else {
           pad.getTransparentDrawing().then((data: any) => {
           this.save(data);
         }, (err: any) => {

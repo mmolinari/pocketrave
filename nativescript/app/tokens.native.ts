@@ -1,4 +1,5 @@
-import {FIREBASE, FILE_SYSTEM, ENUMS, IMAGE_SOURCE, DIALOGS, APPSETTINGS, SEARCHBAR, LOADER, AUDIO, COLOR, COLORPICKER, FRAME} from './app/frameworks/core/tokens';
+import {FIREBASE, FILE_SYSTEM, ENUMS, IMAGE_SOURCE, DIALOGS, APPSETTINGS, SEARCHBAR, 
+  LOADER, AUDIO, COLOR, COLORPICKER, FRAME} from './app/frameworks/core/tokens';
 var firebase = require("nativescript-plugin-firebase");
 import * as fs from 'file-system';
 import * as enums from 'ui/enums';

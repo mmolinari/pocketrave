@@ -6,17 +6,15 @@ import {FirebaseService} from '../../../pocketrave/services/firebase.service';
 import {Observable} from 'rxjs/Observable';
 import {Config} from '../../../core/utils/config';
 import {Router} from '@angular/router';
-import {RaveModel} from '../../../pocketrave/models/rave.model';
 
 @BaseComponent({
-  // moduleId: module.id,
+  moduleId: module.id,
   selector: 'sd-home',
-  templateUrl: './app/frameworks/pocketrave/components/home/home.component.html',
-  styleUrls: ['./app/frameworks/pocketrave/components/home/home.component.css']
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
   public raves$: Observable<any>;
-
   constructor(public firebase: FirebaseService,
               private logger: LogService,
               private _router: Router,

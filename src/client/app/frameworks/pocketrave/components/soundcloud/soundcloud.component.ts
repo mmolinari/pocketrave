@@ -10,9 +10,9 @@ import {Config} from '../../../core/utils/config';
 
 
 @BaseComponent({
-  // moduleId: module.id,
+  moduleId: module.id,
   selector: 'sd-soundcloud',
-  templateUrl: './app/frameworks/pocketrave/components/soundcloud/soundcloud.component.html'
+  templateUrl: 'soundcloud.component.html'
 })
 export class SoundCloudComponent implements OnInit, OnDestroy {
 

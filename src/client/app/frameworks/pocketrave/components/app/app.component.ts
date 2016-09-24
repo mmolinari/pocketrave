@@ -5,9 +5,9 @@ import {ChangeDetectionStrategy} from '@angular/core';
 import {BaseComponent} from '../../../core/decorators/base.component';
 
 @BaseComponent({
-  // moduleId: module.id,
+  moduleId: module.id,
   selector: 'sd-app',
-  templateUrl: './app/frameworks/pocketrave/components/app/app.component.html',
+  templateUrl: 'app.component.html',
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
 export class AppComponent {}

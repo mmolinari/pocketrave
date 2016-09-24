@@ -37,9 +37,6 @@ import { NS_ANALYTICS_PROVIDERS } from './shared/nativescript/index';
 
 enableProdMode();
 
-// intermediate component module
-// helps encapsulate custom native modules in with the components
-// note: couple ways this could be done, just one option presented here...
 @NgModule({
   imports: [
     NativeScriptModule,
