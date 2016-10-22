@@ -23,12 +23,12 @@ export class HomeComponent implements OnInit {
               ) {}
 
  ngOnInit() {
-    this.raves$ = this.firebase.getRaves();
+    this.raves$ = <any>this.firebase.getRaves();
     if (Config.IS_MOBILE_NATIVE()) {
       if (this.frame.topmost().ios) {
           this.frame.topmost().ios.controller.visibleViewController.navigationItem.setHidesBackButtonAnimated(true, false);
-      } 
-    } 
+      }
+    }
   }
 
   public create() {
