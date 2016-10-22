@@ -18,7 +18,6 @@ export class FirebaseService {
   public _allRaves: Array<RaveModel> = [];
   private _database: any;
 
-
   constructor(
     private logger: LogService,
     private utils: UtilsService,
@@ -102,7 +101,6 @@ export class FirebaseService {
   }
 
   public getRaves(): Observable<any> {
-
     return new Observable((observer: any) => {
       let path = 'Raves';
       let listener: any;
@@ -124,7 +122,6 @@ export class FirebaseService {
         });
 
       } else {
-
         listener = this.firebase.database().ref(path).orderByChild('date')
           .on('value', (snapshot:any) => {
             this.ngZone.run(() => {

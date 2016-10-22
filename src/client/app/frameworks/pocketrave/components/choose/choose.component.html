@@ -1,6 +1,6 @@
-<div class="loader" *ngIf="size == 0"></div>
-<section class="tiles">
-    <article *ngFor="let rave of raves$ | async" (click)="choose(rave)">
+<div class="loader" *ngIf="isLoading$ | async"></div>
+<section class="tiles" *ngIf="!(isLoading$ | async)">
+    <article *ngFor="let rave of raves$" (click)="choose(rave)">
         <span>
             <Img src="{{rave.image}}" width="100" height="100" />
             <p>{{ rave.title }}</p>
