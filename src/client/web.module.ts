@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { Http } from '@angular/http';
+
+// libs
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { TranslateLoader } from 'ng2-translate';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
@@ -18,7 +24,10 @@ import { PocketRaveModule } from './app/frameworks/pocketrave/pocketrave.module'
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
-Config.DEBUG.LEVEL_4 = true;
+if (String('<%= ENV %>') === 'dev') {
+  // only output console logging in dev mode
+  Config.DEBUG.LEVEL_4 = true;
+}
 
 let routerModule = RouterModule.forRoot(routes);
 
@@ -28,12 +37,22 @@ if (String('<%= TARGET_DESKTOP %>') === 'true') {
   routerModule = RouterModule.forRoot(routes, {useHash: true});
 }
 
+declare var window, console;
+
+// For AoT compilation to work:
+export function win() {
+  return window;
+}
+export function cons() {
+  return console;
+}
+
 @NgModule({
   imports: [
     BrowserModule,
     CoreModule.forRoot([
-      { provide: WindowService, useValue: window },
-      { provide: ConsoleService, useValue: console }
+      { provide: WindowService, useFactory: (win) },
+      { provide: ConsoleService, useFactory: (cons) }
     ]),
     routerModule,
     AnalyticsModule,

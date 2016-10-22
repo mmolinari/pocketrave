@@ -1,8 +1,8 @@
 // angular
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 // app
-import {ViewBroker} from '../index';
+import { ViewBroker } from '../index';
 
 declare var Reflect: any;
 const _reflect: any = Reflect;
@@ -14,7 +14,7 @@ export class DecoratorUtils {
      * For instance, here we make `TranslatePipe` available for all our components
      */
     // default directives
-    let DIRECTIVES: any[] = [];
+    let DIRECTIVES: Array<any> = [];
 
     // custom decorator options
     if (customDecoratorMetadata) {

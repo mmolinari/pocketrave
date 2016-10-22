@@ -56,16 +56,21 @@ enableProdMode();
     NativeScriptRouterModule
   ]
 })
-class ComponentModule { }
+class ComponentsModule { }
+
+// For AoT compilation to work:
+export function cons() {
+  return console;
+}
 
 @NgModule({
   imports: [
     CoreModule.forRoot([
       { provide: WindowService, useClass: WindowNative },
-      { provide: ConsoleService, useValue: console }
+      { provide: ConsoleService, useFactory: (cons) }
     ]),
     AnalyticsModule,
-    ComponentModule,
+    ComponentsModule,
     PocketRaveModule.forRoot([
       TOKENS_NATIVE,
       {
