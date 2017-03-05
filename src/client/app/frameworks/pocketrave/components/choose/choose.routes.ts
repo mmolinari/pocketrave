@@ -4,7 +4,7 @@ import { ChooseComponent } from './choose.component';
 
 export const ChooseRoutes: Route[] = [
   {
-    path: 'choose',
+    path: 'choose/:id',
     component: ChooseComponent
   },
 ];

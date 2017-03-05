@@ -6,16 +6,17 @@ import {FIREBASE, FILE_SYSTEM, LOADER} from '../../core/tokens';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/share';
-import {RaveModel} from '../models/rave.model';
+import {RaveModel, EventModel} from '../models';
 
 
 declare var zonedCallback: Function;
-
 
 @Injectable()
 export class FirebaseService {
   items: BehaviorSubject<Array<RaveModel>> = new BehaviorSubject([]); 
   public _allRaves: Array<RaveModel> = [];
+  events: BehaviorSubject<Array<RaveModel>> = new BehaviorSubject([]); 
+  public _allEvents: Array<RaveModel> = [];
   private _database: any;
 
   constructor(
@@ -98,20 +99,20 @@ export class FirebaseService {
         'date': 0 - Date.now()
       }
     );
-  }
+  }  
 
-  public getRaves(): Observable<any> {
+  public getRaves(event:string): Observable<any> {
     return new Observable((observer: any) => {
       let path = 'Raves';
       let listener: any;
-
+      
       if (Config.IS_MOBILE_NATIVE()) {
           
         this.LoadingIndicator.show({ message: 'Finding PocketRaves...' });
           
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
-            let results = this.handleSnapshot(snapshot.value, path);
+            let results = this.handleSnapshot(snapshot.value, path, event);
             observer.next(results);
           });
         };
@@ -125,7 +126,48 @@ export class FirebaseService {
         listener = this.firebase.database().ref(path).orderByChild('date')
           .on('value', (snapshot:any) => {
             this.ngZone.run(() => {
-              observer.next(this.handleSnapshot(snapshot.val(), path));
+              observer.next(this.handleSnapshot(snapshot.val(), path, event));
+            });
+          }, observer.error);
+      }
+
+      return () => {
+        // Unsubscribe
+        console.log('unsubscribe raves');
+        if (Config.IS_MOBILE_NATIVE()) {
+          // nothing needs to clean up with native firebase I don't think?
+          // may need to check with Eddy, but should be ok for now
+        } else {
+          // cleanup and detach listener
+          this.firebase.database().ref(path).off('value', listener);
+        }     
+      };
+    }).share();
+  }
+
+  public getEvents(): Observable<any> {
+    return new Observable((observer: any) => {
+      let path = 'Events';
+      let listener: any;
+
+      if (Config.IS_MOBILE_NATIVE()) {
+          
+        let onValueEvent = (snapshot: any) => {
+          this.ngZone.run(() => {
+            let results = this.handleEventSnapshot(snapshot.value, path);
+            observer.next(results);
+          });
+        };
+
+        this.firebase.addValueEventListener(onValueEvent, `/${path}`).then(() => {
+          console.log(`firebase listener setup.`);
+        });
+
+      } else {
+        listener = this.firebase.database().ref(path).orderByChild('id')
+          .on('value', (snapshot:any) => {
+            this.ngZone.run(() => {
+              observer.next(this.handleEventSnapshot(snapshot.val(), path));
             });
           }, observer.error);
       }
@@ -145,14 +187,14 @@ export class FirebaseService {
   }
 
   public getSelectedRave(id: string) {
-    return new Promise((resolve) => {
+    return new Array((resolve) => {
       let complete = () => {
         resolve(this._allRaves.filter(s => s.id === id)[0]);
       };
       if (this._allRaves.length) {
         complete();
       } else {
-        let sub = this.getRaves().subscribe((raves: any) => {
+        let sub = this.getRaves("all").subscribe((raves: any) => {
           sub.unsubscribe();
           complete();
         });
@@ -160,7 +202,7 @@ export class FirebaseService {
     });
   }
 
-  private handleSnapshot(data: any, path?: string) {
+  private handleSnapshot(data: any, path: string, event: string) {
     //empty array, then refill
     this._allRaves = [];
     if (path)
@@ -169,15 +211,32 @@ export class FirebaseService {
     if (data) {
       for (let id in data) {
         let result = (<any>Object).assign({id: id}, data[id]);
-        this._allRaves.push(result);
+        console.log(event,result.event)
+          if(event == "all" || event == result.event){
+            this._allRaves.push(result)
+          };
       }
       this.publishUpdates();
     }
     return this._allRaves;
   }
 
+  private handleEventSnapshot(data: any, path?: string) {
+    //empty array, then refill
+    this._allEvents = [];
+    if (path)
+      if (data) {
+        for (let id in data) {
+          let result = (<any>Object).assign({id: id}, data[id]);
+          this._allEvents.push(result);
+        }
+        this.publishEventUpdates();
+      }
+    return this._allEvents;
+  }
+
+
   private publishUpdates() {
-    // must emit a *new* value (immutability!)
     this._allRaves.sort(function(a, b){
         if(a.date < b.date) return -1;
         if(a.date > b.date) return 1;
@@ -186,9 +245,8 @@ export class FirebaseService {
     this.items.next([...this._allRaves]);
   }
 
-  /*private handleErrors(error) {
-    console.log(JSON.stringify(error));
-    return Promise.reject(error.message);
-  }*/
+  private publishEventUpdates() {
+    this.events.next([...this._allEvents]);
+  }
 
 }

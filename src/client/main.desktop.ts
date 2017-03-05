@@ -48,7 +48,7 @@ app.on('ready', () => {
     console.log(`Page navigated: ${url}`);
   });
 
-  let appTitle: string = `Angular 2 Seed Advanced`;
+  let appTitle: string = `Angular Seed Advanced`;
 
   let helpMenu: any = {
     label: 'Help',
@@ -63,7 +63,7 @@ app.on('ready', () => {
           shell.openExternal('https://github.com/NathanWalker/angular-seed-advanced/issues');
         }
       }, {
-        label: `My Amazing Parent: Minko Gechev's Angular 2 Seed`,
+        label: `My Amazing Parent: Minko Gechev's Angular Seed`,
         click:() => {
           shell.openExternal('https://github.com/mgechev/angular-seed');
         }
@@ -104,7 +104,7 @@ app.on('ready', () => {
         }, {
           type: 'separator'
         }, {
-          label: 'Hide Angular 2 Seed Advanced',
+          label: 'Hide Angular Seed Advanced',
           accelerator: 'Command+H',
           selector: 'hide:'
         }, {

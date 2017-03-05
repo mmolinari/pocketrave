@@ -8,11 +8,9 @@ import { Http } from '@angular/http';
 // libs
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { TranslateLoader } from 'ng2-translate';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
-import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
 
 //pocketrave
 import { TOKENS_WEB } from './tokens.web';
@@ -24,7 +22,7 @@ import { PocketRaveModule } from './app/frameworks/pocketrave/pocketrave.module'
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
-if (String('<%= ENV %>') === 'dev') {
+if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
   Config.DEBUG.LEVEL_4 = true;
 }
@@ -55,7 +53,6 @@ export function cons() {
       { provide: ConsoleService, useFactory: (cons) }
     ]),
     routerModule,
-    AnalyticsModule,
     PocketRaveModule.forRoot(TOKENS_WEB)
   ],
   declarations: [
